@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' href='default.css' type='text/css'/>
+    </head>
+    <body>
+        <h1>Chinese Go (or just plain Go)</h1>
+        <a href='https://www.cs.cmu.edu/~wjh/go/rules/Chinese.html' target='_blank'>
+            Read the rules for Go here.
+        </a>
+
+<pre>
+The image below has most of the characteristics
+of a typical go board.
+</pre>
+
+        <img id='board-img' src='go_board.png'/>
+        </br>
+        <a href='./table.html' target='_blank'>Click here to see the sample gamestate rendered</a>
+        <h3>A Little About Go</h3>
+<pre>
+    Go is an ancient Chinese board game believed to be
+the oldest board game played continuously to the
+present day.  In the game each player can put down
+one stone per turn, if a stone is completely surrounded
+it is "dead" and is removed from the board.  If a stone
+is adjacent (not diagonally) to another stone of the
+same color then its "lives" are added to those of the 
+other stone.  The game ends when one player conceeds
+defeat.
+</pre>
+
+        <h3>How I will Implement the Algorithm</h3>
+<pre>
+    The alogrithm I will usefor detecting "dead" stones
+uses two common data structures primarily as well as a 
+recursive function.  It's steps are as follows:
+</pre>
+        <ol>
+            <li>
+                <pre>Each index on the board will be visited in a loop.</pre>
+            </li>
+            <li>
+                <pre>If a stone is not found the loop continues.</pre>
+            </li>
+            <li>
+                <pre>If a stone is found the loop will push the stones indicies onto a stack.</pre>
+            </li>
+            <li>
+                <pre>The loop will then call a recursive function to determine the stones group and total lives.</pre>
+            </li>
+            <li>
+<pre>
+The recursive function will execute until there are no stones in the stack.
+On each iteration it will push the stones it finds adjacent to the
+current stone onto the stack and add the current stone into a visited
+set.  It will keep a count of the number of total lives the stone
+group has as well as the location of each stone in the group.
+</pre>
+            </li>
+            <li>
+                <pre>After the recursive function executes the stone group and life count is saved and the loop continues.</pre>
+            </li>
+            <li>
+                <pre>If the loop encounters a stone that is in the visited set it will skip that stone.</pre>
+            </li>
+            <li>
+                <pre>After the loop finishes all of the dead stones will be removed from the board and play will continue.</pre>
+            </li>
+        </ol>
+
+    </body>
+</html>

@@ -1,0 +1,30 @@
+body{
+    margin: 0px;
+    margin-left: 15px;   
+}
+
+pre{
+    margin:0px;
+}
+
+h1{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h3{
+    text-decoration: underline;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+a{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+li{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#board-img{
+    width: 400px;
+    height: 400px; 
+}
