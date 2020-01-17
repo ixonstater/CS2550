@@ -4,9 +4,9 @@
         <link rel='stylesheet' href='default.css' type='text/css'/>
     </head>
     <body>
-        <h1>Chinese Go (or just plain Go)</h1>
-        <a href='https://www.cs.cmu.edu/~wjh/go/rules/Chinese.html' target='_blank'>
-            Read the rules for Go here.
+        <h1>2048</h1>
+        <a href='https://en.wikipedia.org/wiki/2048_(video_game)' target='_blank'>
+            Read about 2048 here.
         </a>
 
 <pre>
@@ -14,60 +14,56 @@ The image below has most of the characteristics
 of a typical go board.
 </pre>
 
-        <img id='board-img' src='go_board.png'/>
+        <img id='board-img' src='2048_sample.jpg'/>
         </br>
         <a href='./table.html'>Click here to see the sample gamestate rendered</a>
-        <h3>A Little About Go</h3>
+        <h3>A Little About 2048</h3>
 <pre>
-    Go is an ancient Chinese board game believed to be
-the oldest board game played continuously to the
-present day.  In the game each player can put down
-one stone per turn, if a stone is completely surrounded
-it is "dead" and is removed from the board.  If a stone
-is adjacent (not diagonally) to another stone of the
-same color then its "lives" are added to those of the 
-other stone.  The game ends when one player conceeds
-defeat.
+    2048 is a tile-based game created by Italian developer Gabriele Cirulli
+which gained popularity for its simple controls and challenging objective.
+The game starts by rendering a 4x4 grid and filling two random squares with
+either a 2 tile or a 4 tile.  On each turn the player can choose to move up,
+down, left or right.  When they make a choice the game grid moves all of the
+tiles as far as they can go in the selected direction.  When two tiles of
+the same magnitude come into contact they merge and create a tile with double
+the value.  As the name suggests the goal is to create a 2048 tile.
 </pre>
 
         <h3>How I will Implement the Algorithm</h3>
 <pre>
-    The alogrithm I will usefor detecting "dead" stones
-uses two common data structures primarily as well as a 
-recursive function.  It's steps are as follows:
+    The algorithm for generating successive 2048 states is fairly
+simple, however it does have at least one tricky pitfall.  When
+the tiles are moved and merged the must prefer to merge into the
+index that is furthest in the direction of the merge.  For example
+if there are three twos in a row and the user chooses left the
+middle and the left-most two must merge, not the right most and
+the middle.  This is important as a common play style involves
+playing along the edges and corners of the gameboard.
 </pre>
         <ol>
             <li>
-                <pre>Each index on the board will be visited in a loop.</pre>
+<pre>All "white space" (blank spaces) will be removed from the board in the users chosen direction.</pre>
             </li>
             <li>
-                <pre>If a stone is not found the loop continues.</pre>
+<pre>Each column in the furthest row along the chosen direction will have its values pushed onto a queue.</pre>
             </li>
             <li>
-                <pre>If a stone is found the loop will push the stones indicies onto a stack.</pre>
+<pre>Each value will then be pulled from the queue and attempted to merge with its predecessor.</pre>
             </li>
             <li>
-                <pre>The loop will then call a recursive function to determine the stones group and total lives.</pre>
+<pre>The resulting value (whether a merge takes place or not) will become the next "merge into" value.</pre>
             </li>
             <li>
-<pre>
-The recursive function will execute until there are no stones in the stack.
-On each iteration it will push the stones it finds adjacent to the
-current stone onto the stack and add the current stone into a visited
-set.  It will keep a count of the number of total lives the stone
-group has as well as the location of each stone in the group.
-</pre>
+<pre>Values which are not merged will be placed in an array.</pre>
             </li>
             <li>
-                <pre>After the recursive function executes the stone group and life count is saved and the loop continues.</pre>
-            </li>
-            <li>
-                <pre>If the loop encounters a stone that is in the visited set it will skip that stone.</pre>
-            </li>
-            <li>
-                <pre>After the loop finishes all of the dead stones will be removed from the board and play will continue.</pre>
+<pre>Once all values have been merged the array will be placed back into the game state and the next row will be done.</pre>
             </li>
         </ol>
+
+<pre>
+*2048 image from https://www.tipandtrick.net/2048-number-puzzle-game-free-download-tips-tricks/
+</pre>
 
     </body>
 </html>

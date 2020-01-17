@@ -1,6 +1,7 @@
 body{
     margin: 0px;
-    margin-left: 15px;   
+    margin-left: 15px;
+    margin-bottom: 10px;   
 }
 
 pre{
@@ -22,9 +23,4 @@ a{
 
 li{
     font-family: 'Courier New', Courier, monospace;
-}
-
-#board-img{
-    width: 400px;
-    height: 400px; 
 }
