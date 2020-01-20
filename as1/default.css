@@ -24,3 +24,76 @@ a{
 li{
     font-family: 'Courier New', Courier, monospace;
 }
+
+#board-widget{
+    width: 400px;
+    height: 400px;
+    border-collapse: collapse;
+    background-color: black;
+    margin: 0px;
+}
+
+.board-cell{
+    border: 4px white solid;
+    width: 25%;
+    height: 25%;
+    text-align: center;
+}
+
+.cell-2{
+    background-color: white;
+}
+
+.cell-4{
+    background-color: blue;
+}
+
+.cell-8{
+    background-color: brown;
+}
+
+.cell-16{
+    background-color: orange;
+}
+
+.cell-32{
+    background-color: yellow;
+}
+
+.cell-64{
+    background-color: purple;
+}
+
+.cell-128{
+    background-color: red;
+}
+
+.cell-256{
+    background-color: green;
+}
+
+.cell-512{
+    background-color: pink;
+}
+
+.cell-1024{
+    background-color: thistle;
+}
+
+.cell-2048{
+    background-color: teal;
+}
+
+.legend-div{
+    width: 90px;
+    height: 40px;
+    text-align: center;
+    border: black 2px solid;
+    margin-top: 2px;
+    justify-content: center;
+}
+
+.stretch-tile{
+    width: 188px;
+    margin-left: 3px;
+}
