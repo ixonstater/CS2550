@@ -1,0 +1,24 @@
+#table-wrapper{
+    position: relative;
+    height: 500px;
+    width: 500px;
+}
+
+#game-grid{
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+    border: black 3px solid;
+}
+
+.grid-row{
+    
+}
+
+.grid-cell{
+    border: black 3px solid;
+}
+
+.grid-diagonal{
+    background-color: hotpink;
+}
