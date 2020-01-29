@@ -1,4 +1,6 @@
 
+const ROWS = 4
+const COLUMNS = 4
 
 function makeTable(rows, columns){
     let appendPoint = document.getElementById('table-wrapper')
@@ -26,7 +28,7 @@ function makeTable(rows, columns){
 }
 
 function main(){
-    makeTable(4, 4)
+    makeTable(ROWS, COLUMNS)
 }
 
 document.addEventListener('DOMContentLoaded', main)
