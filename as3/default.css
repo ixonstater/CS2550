@@ -1,0 +1,68 @@
+#table-wrapper{
+    position: relative;
+    height: 500px;
+    width: 500px;
+}
+
+#game-grid{
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+    border: black 3px solid;
+}
+
+.grid-cell{
+    border: white 3px solid;
+}
+
+.grid-diagonal{
+    background-color: hotpink;
+}
+
+.cell-0{
+    background-color: black;
+}
+
+.cell-2{
+    background-color: white;
+}
+
+.cell-4{
+    background-color: blue;
+}
+
+.cell-8{
+    background-color: brown;
+}
+
+.cell-16{
+    background-color: orange;
+}
+
+.cell-32{
+    background-color: yellow;
+}
+
+.cell-64{
+    background-color: purple;
+}
+
+.cell-128{
+    background-color: red;
+}
+
+.cell-256{
+    background-color: green;
+}
+
+.cell-512{
+    background-color: pink;
+}
+
+.cell-1024{
+    background-color: thistle;
+}
+
+.cell-2048{
+    background-color: teal;
+}
