@@ -13,56 +13,53 @@
 
 .grid-cell{
     border: white 3px solid;
-}
-
-.grid-diagonal{
-    background-color: hotpink;
-}
-
-.cell-0{
     background-color: black;
 }
 
+.cell-0{
+    opacity: 0;
+}
+
 .cell-2{
-    background-color: white;
+    opacity: 0.0909;
 }
 
 .cell-4{
-    background-color: blue;
+    opacity: 0.1818;
 }
 
 .cell-8{
-    background-color: brown;
+    opacity: 0.3;
 }
 
 .cell-16{
-    background-color: orange;
+    opacity: 0.38;
 }
 
 .cell-32{
-    background-color: yellow;
+    opacity: 0.4545;
 }
 
 .cell-64{
-    background-color: purple;
+    opacity: 0.5454;
 }
 
 .cell-128{
-    background-color: red;
+    opacity: 0.6363;
 }
 
 .cell-256{
-    background-color: green;
+    opacity: 0.7272;
 }
 
 .cell-512{
-    background-color: pink;
+    opacity: 0.8181;
 }
 
 .cell-1024{
-    background-color: thistle;
+    opacity: 0.84;
 }
 
 .cell-2048{
-    background-color: teal;
+    opacity: 1;
 }
