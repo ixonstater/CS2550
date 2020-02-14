@@ -35,8 +35,6 @@ GameModel.routeSwipe(dir){
         default:
             return false;
     }
-
-    this.gameHasEnded()
 }
 
 GameModel.prototype.swipeRight = function (){
@@ -57,6 +55,14 @@ GameModel.prototype.swipeUp = function (){
 
 GameModel.prototype.swipeDown = function (){
 
+}
+
+GameModel.gameHasEnded = function (){
+    if(this.grid){
+        return true
+    } else {
+        return false
+    }
 }
 
 GameModel.prototype.mergeTiles = function (vectors){
@@ -90,11 +96,17 @@ GameModel.prototype.mergeTiles = function (vectors){
 
 GameModel.prototype.insertRandom = function (mergedGrid){
     let possibleIndicies = this.getPossibleIndicies(mergedGrid)
+    if(possibleIndicies.length == 0){
+        return false
+    }
     let selectedIndicies = []
 
     let indiciesToFill = [0,0].map(function (){
         let index = Math.floor(Math.random() * possibleIndicies.length)
         while(selectedIndicies.includes(index)){
+            if(possibleIndicies.length == 1){
+                break;
+            }
             index = Math.floor(Math.random() * possibleIndicies.length)
         }
         let val = Math.random() < 0.5 ? 2 : 4
