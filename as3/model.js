@@ -11,9 +11,9 @@ const CELL1024 = '1024'
 const CELL2048 = '2048'
 
 function GameModel(){
-    this.grid = [['0','0','64','2048'],
-                ['0','0','32','1024'],
-                ['0','2','16','256'],
+    this.grid = [['2','2','64','64'],
+                ['4','4','1024','1024'],
+                ['0','0','0','0'],
                 ['0','4','8','128']]
     
 }
@@ -22,7 +22,8 @@ GameModel.prototype.swipeRight = function (){
     let vectors = this.grid.map((row) => {
         return row
     })
-
+    let mergedGrid = this.mergeTiles(vectors)
+    console.log(mergedGrid)
 }
 
 GameModel.prototype.swipeLeft = function (){
@@ -45,9 +46,22 @@ GameModel.prototype.mergeTiles = function (vectors){
         let newVector = []
         let newAppendVal = vector.pop()
 
-        while(vector[0]){
+        while (vector.length){
+            let compVal = vector.pop()
 
+            if(compVal != newAppendVal){
+                newVector.unshift(newAppendVal)
+                newAppendVal = compVal
+            } else {
+                newVector.unshift(this.getNextVal(newAppendVal))
+                newAppendVal = vector.pop()
+            }
         }
+        let blankArr = []
+        blankArr.length = 4 - newVector.length
+        blankArr.fill(0, 0)
+        newVector = blankArr.concat(newVector)
+        newGrid.push(newVector)
     }
 
     return newGrid
