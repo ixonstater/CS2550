@@ -10,34 +10,34 @@ const CELL512 = '512'
 const CELL1024 = '1024'
 const CELL2048 = '2048'
 
-function GameModel(){
-    this.grid = [['2','2','64','64'],
-                ['4','4','1024','1024'],
-                ['0','0','0','0'],
-                ['0','4','8','128']]
-    
+function GameModel() {
+    this.grid = [['0', '0', '0', '0'],
+                ['0', '0', '0', '0'],
+                ['0', '0', '0', '0'],
+                ['0', '2', '2', '4']]
+
 }
 
-GameModel.routeSwipe(dir){
-    switch(dir){
+GameModel.prototype.routeSwipe = function (dir) {
+    switch (dir) {
         case 'right':
             this.swipeRight()
-        break;
+            break;
         case 'left':
             this.swipeLeft()
-        break;
+            break;
         case 'up':
             this.swipeUp()
-        break;
+            break;
         case 'down':
             this.swipeDown()
-        break;
+            break;
         default:
             return false;
     }
 }
 
-GameModel.prototype.swipeRight = function (){
+GameModel.prototype.swipeRight = function () {
     let vectors = this.grid.map((row) => {
         return row
     })
@@ -45,38 +45,47 @@ GameModel.prototype.swipeRight = function (){
     this.grid = this.insertRandom(mergedGrid)
 }
 
-GameModel.prototype.swipeLeft = function (){
+GameModel.prototype.swipeLeft = function () {
+    let vectors = this.grid.map((row) => {
+        row.reverse()
+    })
+}
+
+GameModel.prototype.swipeUp = function () {
 
 }
 
-GameModel.prototype.swipeUp = function (){
+GameModel.prototype.swipeDown = function () {
 
 }
 
-GameModel.prototype.swipeDown = function (){
-
-}
-
-GameModel.gameHasEnded = function (){
-    if(this.grid){
+GameModel.prototype.gameHasEnded = function () {
+    if (this.grid) {
         return true
     } else {
         return false
     }
 }
 
-GameModel.prototype.mergeTiles = function (vectors){
+GameModel.prototype.mergeTiles = function (vectors) {
     let newGrid = []
 
-    for (vector of vectors){
+    for (vector of vectors) {
+        //move tiles
+        vector = vector.filter((elem) => {
+            if(elem !== '0'){
+                return elem
+            }
+        })
 
+        //merge tiles
         let newVector = []
         let newAppendVal = vector.pop()
 
-        while (vector.length){
+        while (newAppendVal) {
             let compVal = vector.pop()
 
-            if(compVal != newAppendVal){
+            if (compVal != newAppendVal) {
                 newVector.unshift(newAppendVal)
                 newAppendVal = compVal
             } else {
@@ -84,6 +93,7 @@ GameModel.prototype.mergeTiles = function (vectors){
                 newAppendVal = vector.pop()
             }
         }
+
         let blankArr = []
         blankArr.length = 4 - newVector.length
         blankArr.fill('0', 0)
@@ -94,17 +104,17 @@ GameModel.prototype.mergeTiles = function (vectors){
     return newGrid
 }
 
-GameModel.prototype.insertRandom = function (mergedGrid){
+GameModel.prototype.insertRandom = function (mergedGrid) {
     let possibleIndicies = this.getPossibleIndicies(mergedGrid)
-    if(possibleIndicies.length == 0){
+    if (possibleIndicies.length == 0) {
         return false
     }
     let selectedIndicies = []
 
-    let indiciesToFill = [0,0].map(function (){
+    let indiciesToFill = [0, 0].map(function () {
         let index = Math.floor(Math.random() * possibleIndicies.length)
-        while(selectedIndicies.includes(index)){
-            if(possibleIndicies.length == 1){
+        while (selectedIndicies.includes(index)) {
+            if (possibleIndicies.length == 1) {
                 break;
             }
             index = Math.floor(Math.random() * possibleIndicies.length)
@@ -113,7 +123,7 @@ GameModel.prototype.insertRandom = function (mergedGrid){
         return [index, val]
     })
 
-    for (pkg of indiciesToFill){
+    for (pkg of indiciesToFill) {
         [index, val] = pkg
         gridIndex = possibleIndicies[index]
         mergedGrid[gridIndex[0]][gridIndex[1]] = val
@@ -122,50 +132,50 @@ GameModel.prototype.insertRandom = function (mergedGrid){
     return mergedGrid
 }
 
-GameModel.prototype.getPossibleIndicies = function(mergedGrid){
+GameModel.prototype.getPossibleIndicies = function (mergedGrid) {
     let indicies = []
-    for (let x = 0; x < 4; x++){
-        for (let y = 0; y < 4; y++){
-            if(mergedGrid[x][y] == '0'){
-                indicies.push([x,y])
+    for (let x = 0; x < 4; x++) {
+        for (let y = 0; y < 4; y++) {
+            if (mergedGrid[x][y] == '0') {
+                indicies.push([x, y])
             }
         }
     }
     return indicies
 }
 
-GameModel.prototype.getNextVal = function (currentVal){
-    switch (currentVal){
+GameModel.prototype.getNextVal = function (currentVal) {
+    switch (currentVal) {
 
-        case '2':
-            return '4'
+        case CELL2:
+            return CELL4
 
-        case '4':
-            return '8'
+        case CELL4:
+            return CELL8
 
-        case '8':
-            return '16'
+        case CELL8:
+            return CELL16
 
-        case '16':
-            return '32'
+        case CELL16:
+            return CELL32
 
-        case '32':
-            return '64'
+        case CELL32:
+            return CELL64
 
-        case '64':
-            return '128'
+        case CELL64:
+            return CELL128
 
-        case '128':
-            return '256'
-        
-        case '256':
-            return '512'
+        case CELL128:
+            return CELL256
 
-        case '512':
-            return '1024'
+        case CELL256:
+            return CELL512
 
-        case '1024':
-            return '2048'
+        case CELL512:
+            return CELL1024
+
+        case CELL1024:
+            return CELL2048
 
         default:
             return '0'
