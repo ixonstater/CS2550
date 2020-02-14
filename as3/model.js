@@ -47,7 +47,7 @@ GameModel.prototype.swipeRight = function () {
 
 GameModel.prototype.swipeLeft = function () {
     let vectors = this.grid.map((row) => {
-        return row.reverse()
+        return row.slice().reverse()
     })
     let scrambledRows = this.mergeTiles(vectors)
     let mergedGrid = scrambledRows.map((row) => {
@@ -57,11 +57,53 @@ GameModel.prototype.swipeLeft = function () {
 }
 
 GameModel.prototype.swipeUp = function () {
+    let vectors = [[,,,,],
+                   [,,,,],
+                   [,,,,],
+                   [,,,,]]
+                   
+    let mergedGrid = [[,,,,],
+                      [,,,,],
+                      [,,,,],
+                      [,,,,]]
+                   
+    let arrangeRows = (vectors, grid) => {
 
+        for (let x = 0; x < 4; x++){
+            for (let y = 0; y < 4; y++){
+                vectors[x][y] = grid[y][x]
+            }
+        }
+    }
+    arrangeRows(vectors, this.grid.slice().reverse())
+    let scrambledRows = this.mergeTiles(vectors)
+    arrangeRows(mergedGrid, scrambledRows)
+    mergedGrid.reverse()
+    this.grid = this.insertRandom(mergedGrid)
 }
 
 GameModel.prototype.swipeDown = function () {
-
+    let vectors = [[,,,,],
+                   [,,,,],
+                   [,,,,],
+                   [,,,,]]
+                   
+    let mergedGrid = [[,,,,],
+                      [,,,,],
+                      [,,,,],
+                      [,,,,]]
+                   
+    let arrangeRows = (vectors, grid) => {
+        for (let x = 0; x < 4; x++){
+            for (let y = 0; y < 4; y++){
+                vectors[x][y] = grid[y][x]
+            }
+        }
+    }
+    arrangeRows(vectors, this.grid)
+    let scrambledRows = this.mergeTiles(vectors)
+    arrangeRows(mergedGrid, scrambledRows)
+    this.grid = this.insertRandom(mergedGrid)
 }
 
 GameModel.prototype.gameHasEnded = function () {
