@@ -47,8 +47,13 @@ GameModel.prototype.swipeRight = function () {
 
 GameModel.prototype.swipeLeft = function () {
     let vectors = this.grid.map((row) => {
-        row.reverse()
+        return row.reverse()
     })
+    let scrambledRows = this.mergeTiles(vectors)
+    let mergedGrid = scrambledRows.map((row) => {
+        return row.reverse()
+    })
+    this.grid = this.insertRandom(mergedGrid)
 }
 
 GameModel.prototype.swipeUp = function () {
@@ -60,11 +65,7 @@ GameModel.prototype.swipeDown = function () {
 }
 
 GameModel.prototype.gameHasEnded = function () {
-    if (this.grid) {
-        return true
-    } else {
-        return false
-    }
+    return false
 }
 
 GameModel.prototype.mergeTiles = function (vectors) {
@@ -106,9 +107,6 @@ GameModel.prototype.mergeTiles = function (vectors) {
 
 GameModel.prototype.insertRandom = function (mergedGrid) {
     let possibleIndicies = this.getPossibleIndicies(mergedGrid)
-    if (possibleIndicies.length == 0) {
-        return false
-    }
     let selectedIndicies = []
 
     let indiciesToFill = [0, 0].map(function () {
@@ -126,7 +124,7 @@ GameModel.prototype.insertRandom = function (mergedGrid) {
     for (pkg of indiciesToFill) {
         [index, val] = pkg
         gridIndex = possibleIndicies[index]
-        mergedGrid[gridIndex[0]][gridIndex[1]] = val
+        mergedGrid[gridIndex[0]][gridIndex[1]] = '' + val
     }
 
     return mergedGrid
