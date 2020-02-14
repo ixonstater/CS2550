@@ -18,12 +18,33 @@ function GameModel(){
     
 }
 
+GameModel.routeSwipe(dir){
+    switch(dir){
+        case 'right':
+            this.swipeRight()
+        break;
+        case 'left':
+            this.swipeLeft()
+        break;
+        case 'up':
+            this.swipeUp()
+        break;
+        case 'down':
+            this.swipeDown()
+        break;
+        default:
+            return false;
+    }
+
+    this.gameHasEnded()
+}
+
 GameModel.prototype.swipeRight = function (){
     let vectors = this.grid.map((row) => {
         return row
     })
     let mergedGrid = this.mergeTiles(vectors)
-    console.log(mergedGrid)
+    this.grid = this.insertRandom(mergedGrid)
 }
 
 GameModel.prototype.swipeLeft = function (){
@@ -59,12 +80,46 @@ GameModel.prototype.mergeTiles = function (vectors){
         }
         let blankArr = []
         blankArr.length = 4 - newVector.length
-        blankArr.fill(0, 0)
+        blankArr.fill('0', 0)
         newVector = blankArr.concat(newVector)
         newGrid.push(newVector)
     }
 
     return newGrid
+}
+
+GameModel.prototype.insertRandom = function (mergedGrid){
+    let possibleIndicies = this.getPossibleIndicies(mergedGrid)
+    let selectedIndicies = []
+
+    let indiciesToFill = [0,0].map(function (){
+        let index = Math.floor(Math.random() * possibleIndicies.length)
+        while(selectedIndicies.includes(index)){
+            index = Math.floor(Math.random() * possibleIndicies.length)
+        }
+        let val = Math.random() < 0.5 ? 2 : 4
+        return [index, val]
+    })
+
+    for (pkg of indiciesToFill){
+        [index, val] = pkg
+        gridIndex = possibleIndicies[index]
+        mergedGrid[gridIndex[0]][gridIndex[1]] = val
+    }
+
+    return mergedGrid
+}
+
+GameModel.prototype.getPossibleIndicies = function(mergedGrid){
+    let indicies = []
+    for (let x = 0; x < 4; x++){
+        for (let y = 0; y < 4; y++){
+            if(mergedGrid[x][y] == '0'){
+                indicies.push([x,y])
+            }
+        }
+    }
+    return indicies
 }
 
 GameModel.prototype.getNextVal = function (currentVal){
