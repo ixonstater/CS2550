@@ -12,6 +12,7 @@ View.prototype.updateUI = function (stateGrid){
     for (var x = 0; x < this.numRows; x++){
         for (var y = 0; y < this.numCols; y++){
             this.grid[x][y].className = 'grid-cell cell-' + stateGrid[x][y]
+            this.grid[x][y].firstChild.innerHTML = stateGrid[x][y]
         }
     }
 }
@@ -30,7 +31,10 @@ View.prototype.makeTable = function (rows, columns){
 
         for (var y = 0; y < columns; y++){
             var cell = document.createElement('td')
+            var innerP = document.createElement('p')
+            innerP.className = 'cell-inner-text'
             cell.className = 'grid-cell'
+            cell.append(innerP)
             row.appendChild(cell)
             rowRefs.push(cell)
         }
