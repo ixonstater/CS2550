@@ -149,25 +149,10 @@ GameModel.prototype.mergeTiles = function (vectors) {
 
 GameModel.prototype.insertRandom = function (mergedGrid) {
     let possibleIndicies = this.getPossibleIndicies(mergedGrid)
-    let selectedIndicies = []
 
-    let indiciesToFill = [0, 0].map(function () {
-        let index = Math.floor(Math.random() * possibleIndicies.length)
-        while (selectedIndicies.includes(index)) {
-            if (possibleIndicies.length == 1) {
-                break;
-            }
-            index = Math.floor(Math.random() * possibleIndicies.length)
-        }
-        let val = Math.random() < 0.5 ? 2 : 4
-        return [index, val]
-    })
-
-    for (pkg of indiciesToFill) {
-        [index, val] = pkg
-        gridIndex = possibleIndicies[index]
-        mergedGrid[gridIndex[0]][gridIndex[1]] = '' + val
-    }
+    let index = possibleIndicies[Math.floor(Math.random() * possibleIndicies.length)]
+    let val = Math.random() < 0.5 ? 2 : 4
+    mergedGrid[index[0]][index[1]] = '' + val
 
     return mergedGrid
 }
