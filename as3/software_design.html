@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type = 'text/css' rel = 'stylesheet' href = 'default.css'/>
+    </head>
+    <body>
+        <h1>Preliminary Software Design</h1>
+        <h3 class = 'indent-1'>Model</h3>
+        <h4 class = 'indent-1'>Constants</h4>
+        <ul class = 'indent-2'>
+            <li><strong>CELL2</strong> Text value for a model cell containing a 2.</li>
+            <li><strong>CELL4</strong> Text value for a model cell containing a 4.</li>
+            <li><strong>CELL8</strong> Text value for a model cell containing a 8.</li>
+            <li><strong>CELL16</strong> Text value for a model cell containing a 16.</li>
+            <li><strong>CELL32</strong> Text value for a model cell containing a 32.</li>
+            <li><strong>CELL64</strong> Text value for a model cell containing a 64.</li>
+            <li><strong>CELL128</strong> Text value for a model cell containing a 128.</li>
+            <li><strong>CELL256</strong> Text value for a model cell containing a 256.</li>
+            <li><strong>CELL512</strong> Text value for a model cell containing a 512.</li>
+            <li><strong>CELL1024</strong> Text value for a model cell containing a 1024.</li>
+            <li><strong>CELL2048</strong> Text value for a model cell containing a 2048.</li>
+        </ul>
+
+        <h4 class = 'indent-1'>Class Memebers</h4>
+        <ul class = 'indent-2'>
+            <li>
+                <strong>Grid</strong>: A two dimenisonal array of strings using the values described in the constants section
+                </br> which describes the current state of the board and is update on each keypress.
+            </li>
+        </ul>
+
+        <h4 class = 'indent-1'>Functions</h4>
+        <ul class = 'indent-2'>
+            <li>
+                <strong>routeSwipe(direction)</strong>: Calls the appropriate swipe function for a particular direction
+                </br>and then calls the function to insert a new 2 or 4 in a random spot.
+            </li>
+            <li><strong>swipeRight()</strong>: Arrages grid for right swipe, calls Merge Tiles and assigns returned value to class member Grid.</li>
+            <li><strong>swipeLeft()</strong>: Arrages grid for left swipe, calls Merge Tiles and assigns returned value to class member Grid.</li>
+            <li><strong>swipeUp()</strong>: Arrages grid for up swipe, calls Merge Tiles and assigns returned value to class member Grid.</li>
+            <li><strong>swipeDown()</strong>: Arrages grid for down swipe, calls Merge Tiles and assigns returned value to class member Grid.</li>
+            <li><strong>gameHasEnded()</strong>: Returns true if game has ended, false if it has not.</li>
+            <li>
+                <strong>mergeTiles(vectors)</strong>: Strips the grid passed to it of empty spaces and merges tiles left to right.
+            </li>
+            <li><strong>insertRandom(mergedGrid)</strong>: Inserts either a two or a four into the grid passed to it.</li>
+            <li><strong>getPossibleIndicies(mergedGrid)</strong>: Returns a list of blank indicies in the grid.</li>
+            <li><strong>getNextVal(currentValue)</strong>: Returns a string representation of the next power of two after the number passed to it.</li>
+        </ul>
+    </body>
+</html>
