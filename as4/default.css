@@ -2,6 +2,8 @@
     position: relative;
     height: 500px;
     width: 500px;
+    animation-name: loadanim;
+    animation-duration: 7s;
 }
 
 #game-grid{
@@ -91,4 +93,19 @@
 
 .indent-2{
     margin-left: 60px;
+}
+
+@keyframes loadanim {
+    from {
+        height: 150px;
+        width: 150px;
+        left: 50vw;
+        top: 50vh;
+    }
+    to {
+        height: 500px;
+        width: 500px;
+        left: 0px;
+        top: 0px;
+    }
 }
