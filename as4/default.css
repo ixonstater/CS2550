@@ -2,8 +2,8 @@
     position: relative;
     height: 500px;
     width: 500px;
-    animation-name: loadanim;
-    animation-duration: 7s;
+    /* animation-name: loadanim;
+    animation-duration: 7s; */
 }
 
 #game-grid{

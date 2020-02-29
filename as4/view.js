@@ -13,6 +13,8 @@ View.prototype.updateUI = function (stateGrid, name, matchName, emptyCells, sele
         for (var y = 0; y < this.numCols; y++){
             this.grid[x][y].className = 'grid-cell cell-' + stateGrid[x][y]
             this.grid[x][y].firstChild.innerHTML = stateGrid[x][y]
+            this.grid[x][y].style = ''
+            this.grid[x][y].firstChild.style = ''
         }
     }
 
@@ -41,7 +43,19 @@ View.prototype.makeTable = function (rows, columns){
             var innerP = document.createElement('p')
             innerP.className = 'cell-inner-text'
             cell.className = 'grid-cell'
+            cell.dataset.index = `${x},${y}`
             cell.append(innerP)
+            cell.addEventListener('click', function (e){
+                if(e.target.tagName === 'P'){
+                    e.target.innerHTML = 'Clicked'
+                    e.target.style.color = 'black'
+                    document.getElementById('clicked-cell').innerHTML = 'You clicked: ' + e.target.parentNode.dataset.index
+                } else {
+                    e.target.firstChild.innerHTML = 'Clicked'
+                    e.target.firstChild.style.color = 'black'
+                    document.getElementById('clicked-cell').innerHTML = 'You clicked: ' + e.target.dataset.index
+                }
+            })
             row.appendChild(cell)
             rowRefs.push(cell)
         }

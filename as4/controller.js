@@ -34,6 +34,8 @@ GameInstance.prototype.swipe = function (e){
         case 'ArrowDown':
             this.model.routeSwipe('down')
         break;
+        default:
+        return;
     }
     if(this.model.gameHasEnded()){
         this.finishGame()
