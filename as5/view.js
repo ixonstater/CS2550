@@ -17,9 +17,22 @@ View.prototype.updateUI = function (stateGrid){
     }
 }
 
+View.prototype.updateLogin = function(successful, timestamp = "", username = ""){
+    if(successful){
+        document.getElementById('login-message').innerHTML = 'Successfully logged in.'
+        document.getElementById('login-form').style.display = 'none'
+        document.getElementById('table-wrapper').style.display = 'block'
+        document.getElementById('username-text').innerHTML = "Username: " + username
+        document.getElementById('login-timestamp').innerHTML = "Timestamp: " + timestamp
+    } else {
+        document.getElementById('login-message').innerHTML = 'Bad credentials, please try again.'
+    }
+}
+
 View.prototype.makeTable = function (rows, columns){
     var appendPoint = document.getElementById('table-wrapper')
     var table = document.createElement('table')
+    appendPoint.style.display = 'none'
     table.id = 'game-grid'
     var gridRefs = []
 

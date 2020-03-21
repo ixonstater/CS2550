@@ -11,6 +11,10 @@
     border: black 3px solid;
 }
 
+#clear-storage{
+    margin-top: 10px;
+}
+
 .grid-cell{
     border: white 3px solid;
     background-color: black;
