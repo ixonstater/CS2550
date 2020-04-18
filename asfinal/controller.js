@@ -13,10 +13,20 @@ GameInstance.prototype.initGame = function (){
     this.view.makeTable(ROWS, COLUMNS)
     this.view.updateUI(this.model.grid)
     document.addEventListener('keydown', this.swipe.bind(this))
+    document.getElementById('show-winning-board').addEventListener('click', this.showWinningBoard.bind(this))
 }
 
 GameInstance.prototype.finishGame = function (){
 
+}
+
+GameInstance.prototype.newGame = function (){
+
+}
+
+GameInstance.prototype.showWinningBoard = function (){
+    this.model.grid = this.model.winningBoard
+    this.view.updateUI(this.model.grid)
 }
 
 GameInstance.prototype.swipe = function (e){
@@ -33,6 +43,8 @@ GameInstance.prototype.swipe = function (e){
         case 'ArrowDown':
             this.model.routeSwipe('down')
         break;
+        default:
+            return
     }
 
     this.startPlayAudioCountdown()
@@ -41,10 +53,6 @@ GameInstance.prototype.swipe = function (e){
         this.finishGame()
     }
     this.view.updateUI(this.model.grid)
-}
-
-GameInstance.prototype.newGame = function (){
-
 }
 
 GameInstance.prototype.startPlayAudioCountdown = function(){

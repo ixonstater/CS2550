@@ -13,7 +13,7 @@ const CELL2048 = '2048'
 function GameModel() {
     this.lastTurnTimestamp
     this.winningBoardJson = this.readData()
-    this.winningBoard = JSON.parse(this.winningBoardJson)
+    this.winningBoard = JSON.parse(this.winningBoardJson).boardState
     this.initialGrid = 
     [['0', '0', '0', '0'],
     ['0', '0', '0', '0'],
