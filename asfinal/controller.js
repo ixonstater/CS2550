@@ -18,17 +18,19 @@ GameInstance.prototype.initGame = function (){
 }
 
 GameInstance.prototype.finishGame = function (){
-
+    this.view.hideTable()
 }
 
 GameInstance.prototype.newGame = function (){
     this.model = new GameModel()
     this.view.updateUI(this.model.grid)
+    this.view.showTable()
 }
 
 GameInstance.prototype.showWinningBoard = function (){
     this.model.grid = this.model.winningBoard
     this.view.updateUI(this.model.grid)
+    this.view.showTable()
 }
 
 GameInstance.prototype.swipe = function (e){

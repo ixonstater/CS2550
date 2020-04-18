@@ -48,6 +48,16 @@ View.prototype.makeTable = function (rows, columns){
     this.numRows = rows
 }
 
+View.prototype.hideTable = function(){
+    document.getElementById('table-wrapper').style.display = 'none'
+    document.getElementById('game-over-msg').style.display = 'block'
+}
+
+View.prototype.showTable = function(){
+    document.getElementById('table-wrapper').style.display = 'block'
+    document.getElementById('game-over-msg').style.display = 'none'
+}
+
 View.prototype.startAudio = function(){
     document.getElementById('river-sound').play()
 }
