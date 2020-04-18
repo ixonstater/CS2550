@@ -47,3 +47,13 @@ View.prototype.makeTable = function (rows, columns){
     this.numCols = columns
     this.numRows = rows
 }
+
+View.prototype.startAudio = function(){
+    document.getElementById('river-sound').play()
+}
+
+View.prototype.stopAudio = function(){
+    var audio = document.getElementById('river-sound')
+    audio.pause()
+    audio.currentTime = 0
+}

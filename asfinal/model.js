@@ -11,6 +11,7 @@ const CELL1024 = '1024'
 const CELL2048 = '2048'
 
 function GameModel() {
+    this.lastTurnTimestamp
     this.winningBoardJson = this.readData()
     this.winningBoard = JSON.parse(this.winningBoardJson)
     this.initialGrid = 

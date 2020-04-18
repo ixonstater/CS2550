@@ -1,8 +1,12 @@
+var ref
+
 function GameInstance () {
     this.model = new GameModel()
     this.view = new View()
     this.numRows = null
     this.numCols = null
+    this.audioCountDown = null
+    ref = this
 }
 
 GameInstance.prototype.initGame = function (){
@@ -30,6 +34,9 @@ GameInstance.prototype.swipe = function (e){
             this.model.routeSwipe('down')
         break;
     }
+
+    this.startPlayAudioCountdown()
+
     if(this.model.gameHasEnded()){
         this.finishGame()
     }
@@ -38,4 +45,16 @@ GameInstance.prototype.swipe = function (e){
 
 GameInstance.prototype.newGame = function (){
 
+}
+
+GameInstance.prototype.startPlayAudioCountdown = function(){
+    this.view.startAudio()
+
+    if(this.audioCountDown){
+        clearTimeout(this.audioCountDown)
+    }
+    
+    this.audioCountDown = window.setTimeout(function (){
+        this.view.stopAudio()
+    }.bind(this), 3000)
 }
