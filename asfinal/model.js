@@ -13,6 +13,7 @@ const CELL2048 = '2048'
 function GameModel() {
     this.winningBoardJson = this.readData()
     this.winningBoard = JSON.parse(this.winningBoardJson).boardState
+    this.hasWon = false
     this.initialGrid = 
     [['0', '0', '0', '0'],
     ['0', '0', '0', '0'],
@@ -118,7 +119,10 @@ GameModel.prototype.swipeDown = function () {
 }
 
 GameModel.prototype.gameHasEnded = function () {
-    if(this.getPossibleIndicies(this.grid).length > 0){
+    if(this.hasWon){
+        return true
+    }
+    else if(this.getPossibleIndicies(this.grid).length > 0){
         return false
     }
     else{
@@ -230,6 +234,7 @@ GameModel.prototype.getNextVal = function (currentVal) {
             return CELL1024
 
         case CELL1024:
+            this.hasWon = true
             return CELL2048
 
         default:
