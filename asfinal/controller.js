@@ -34,6 +34,10 @@ GameInstance.prototype.showWinningBoard = function (){
 }
 
 GameInstance.prototype.swipe = function (e){
+    if(this.model.gameHasEnded()){
+        this.finishGame()
+    }
+    
     switch(e.key){
         case 'ArrowRight':
             this.model.routeSwipe('right')
@@ -52,10 +56,6 @@ GameInstance.prototype.swipe = function (e){
     }
 
     this.startPlayAudioCountdown()
-
-    if(this.model.gameHasEnded()){
-        this.finishGame()
-    }
     this.view.updateUI(this.model.grid)
 }
 

@@ -25,16 +25,16 @@ function GameModel() {
 GameModel.prototype.routeSwipe = function (dir) {
     switch (dir) {
         case 'right':
-            this.swipeRight()
+            this.grid = this.swipeRight()
             break;
         case 'left':
-            this.swipeLeft()
+            this.grid = this.swipeLeft()
             break;
         case 'up':
-            this.swipeUp()
+            this.grid = this.swipeUp()
             break;
         case 'down':
-            this.swipeDown()
+            this.grid = this.swipeDown()
             break;
         default:
             return false;
@@ -53,7 +53,7 @@ GameModel.prototype.swipeRight = function () {
         return row
     })
     let mergedGrid = this.mergeTiles(vectors)
-    this.grid = this.insertRandom(mergedGrid)
+    return this.insertRandom(mergedGrid)
 }
 
 GameModel.prototype.swipeLeft = function () {
@@ -64,7 +64,7 @@ GameModel.prototype.swipeLeft = function () {
     let mergedGrid = scrambledRows.map((row) => {
         return row.reverse()
     })
-    this.grid = this.insertRandom(mergedGrid)
+    return this.insertRandom(mergedGrid)
 }
 
 GameModel.prototype.swipeUp = function () {
@@ -90,7 +90,7 @@ GameModel.prototype.swipeUp = function () {
     let scrambledRows = this.mergeTiles(vectors)
     arrangeRows(mergedGrid, scrambledRows)
     mergedGrid.reverse()
-    this.grid = this.insertRandom(mergedGrid)
+    return this.insertRandom(mergedGrid)
 }
 
 GameModel.prototype.swipeDown = function () {
@@ -114,11 +114,30 @@ GameModel.prototype.swipeDown = function () {
     arrangeRows(vectors, this.grid)
     let scrambledRows = this.mergeTiles(vectors)
     arrangeRows(mergedGrid, scrambledRows)
-    this.grid = this.insertRandom(mergedGrid)
+    return this.insertRandom(mergedGrid)
 }
 
 GameModel.prototype.gameHasEnded = function () {
-    return false
+    if(this.getPossibleIndicies(this.grid).length > 0){
+        return false
+    }
+    else{
+        var funcs = [
+            this.swipeDown,
+            this.swipeLeft,
+            this.swipeRight,
+            this.swipeUp
+        ]
+        for(func of funcs){
+            try{
+                    func()
+                    return false
+            } catch{
+                continue
+            }
+        }
+        return true
+    }
 }
 
 GameModel.prototype.mergeTiles = function (vectors) {
