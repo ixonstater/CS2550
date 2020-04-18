@@ -14,6 +14,7 @@ GameInstance.prototype.initGame = function (){
     this.view.updateUI(this.model.grid)
     document.addEventListener('keydown', this.swipe.bind(this))
     document.getElementById('show-winning-board').addEventListener('click', this.showWinningBoard.bind(this))
+    document.getElementById('reset-game').addEventListener('click', this.newGame.bind(this))
 }
 
 GameInstance.prototype.finishGame = function (){
@@ -21,7 +22,8 @@ GameInstance.prototype.finishGame = function (){
 }
 
 GameInstance.prototype.newGame = function (){
-
+    this.model = new GameModel()
+    this.view.updateUI(this.model.grid)
 }
 
 GameInstance.prototype.showWinningBoard = function (){
